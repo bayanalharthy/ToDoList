@@ -34,7 +34,7 @@ class list_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_, container, false)
+        return inflater.inflate(R.layout.fragment_list_recycle, container, false)
     }
 
     companion object {
