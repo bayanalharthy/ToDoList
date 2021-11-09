@@ -2,9 +2,7 @@ package com.example.todolist.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.room.Database
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import java.lang.IllegalStateException
 import java.util.*
 import java.util.concurrent.Executors
@@ -12,10 +10,9 @@ import java.util.concurrent.Executors
 
 private const val DATABASE_NAME="toDoList_database"
 
-class ToDoListRepository {
-    class ToDoListRepository(context: Context) {
+class ToDoListRepository private constructor(context: Context): ToDoListDao {
 
-        private val Database: ToListDatabase = Room.databaseBuilder(
+        private val database: ToListDatabase = Room.databaseBuilder(
             context.applicationContext,
             ToListDatabase::class.java,
             DATABASE_NAME
@@ -23,27 +20,33 @@ class ToDoListRepository {
         ).build()
 
 
-        private val ToDoListDao = Database.ToDoListDao()
+        private val toDoListDao = database.ToDoListDao()
         private val executor = Executors.newSingleThreadExecutor()
 
-        fun getAllToDoList(): LiveData<List<ToDoList>> = ToDoListDao.getAllToDoList()
+        override fun getAllToDoList(): LiveData<List<ToDoList>> = toDoListDao.getAllToDoList()
 
-        fun getToDoList(id: UUID): LiveData<ToDoList?> {
-            return ToDoListDao.getToDoList(id)
+        override fun getToDoList(id: UUID): LiveData<ToDoList?> {
+         return  toDoListDao.getToDoList(id)
         }
 
-        fun updateToDoList(crime: ToDoList) {
+        override fun updateToDoList(toDoList:ToDoList) {
             executor.execute {
-                ToDoListDao.updateToDoList(ToDoList())
+                toDoListDao.updateToDoList(toDoList)
             }
 
         }
 
-        fun addToDoList(toDoList: ToDoList) {
+        override fun addToDoList(toDoList:ToDoList) {
             executor.execute {
-                ToDoListDao.addToDoList(toDoList)
+                toDoListDao.addToDoList(toDoList)
             }
         }
+
+    override fun deleteToDOList(toDoList: ToDoList) {
+        executor.execute {
+            toDoListDao.deleteToDOList(toDoList)
+        }
+
     }
 
     companion object {
@@ -66,8 +69,6 @@ class ToDoListRepository {
     }
 
 }
-
-
 
 
 

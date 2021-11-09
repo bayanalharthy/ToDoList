@@ -1,31 +1,57 @@
 package com.example.todolist
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.database.ToDoList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [list_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class list_Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+private lateinit var ToDoListRecyclerView: RecyclerView
+   val toDoListViewModel by lazy { ViewModelProvider(this).get(ToDoListViewModel::class.java) }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.new_todo,menu)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        setHasOptionsMenu(true)
+
+        }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.new_todo->{
+                val toDoList=ToDoList()
+                toDoListViewModel.addToDoList(ToDoList())
+                val args=Bundle()
+                args.putSerializable(KEY_ID,toDoList.id)
+                val fragment= ToDoFragment()
+                fragment.arguments=args
+
+
+                activity?.let {
+                    it.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_container,fragment)
+                        .addToBackStack(null)
+                        .commit()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -33,27 +59,87 @@ class list_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_recycle, container, false)
+       val view = inflater.inflate(R.layout.fragment_list_recycle, container, false)
+        ToDoListRecyclerView=view.findViewById(R.id.ToDo_recycler_view)
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        ToDoListRecyclerView.layoutManager=linearLayoutManager
+
+        return view
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment list_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            list_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        toDoListViewModel.liveDataToDoList.observe(
+            viewLifecycleOwner, Observer {
+
+                updateUI(it)
             }
+
+        )
     }
+
+    private fun updateUI(ToDoList: List<ToDoList>) {
+        val toDoListAdapter =ToDoListAdapter(ToDoList)
+        ToDoListRecyclerView.adapter = toDoListAdapter
+    }
+    private inner class ToDoListHolder(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener {
+
+        private lateinit var toDoList: ToDoList
+        private val titleTextView: TextView = itemView.findViewById(R.id.todo_text)
+        private val dateTextView: TextView = itemView.findViewById(R.id.to_do_date)
+        private val doneImageView: ImageView = itemView.findViewById(R.id.to_do_done)
+
+
+
+        init {
+
+            itemView.setOnClickListener(this)
+
+
+        }
+        fun bind(toDoList: ToDoList) {
+            this.toDoList=toDoList
+            titleTextView.text = toDoList.title
+            dateTextView.text = toDoList.date.toString()
+
+                View.GONE
+
+            }
+
+        override fun onClick(v: View?) {
+
+        }
+
+
+    }
+
+    private inner class ToDoListAdapter(var ToDoList: List<ToDoList>) :
+        RecyclerView.Adapter<ToDoListHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ToDoListHolder  {
+            val view = layoutInflater.inflate(R.layout.fragment_todo_list_item, parent, false)
+            return ToDoListHolder(view)
+
+        }
+
+        override fun onBindViewHolder(holder: ToDoListHolder, position: Int) {
+            val ToDoList = ToDoList[position]
+            holder.bind(ToDoList)
+        }
+
+        override fun getItemCount(): Int = ToDoList.size
+
+
+
+
+
+    }
+
+
+
 }
+

@@ -9,84 +9,138 @@
         android:id="@+id/imageView2"
         android:layout_width="41dp"
         android:layout_height="40dp"
-        app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="157dp" />
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/todo_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
 
     <TextView
-        android:id="@+id/todo_ltem"
-        a
+        android:id="@+id/todo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="163dp"
+        android:layout_marginEnd="23dp"
+
+        android:layout_marginBottom="40dp"
         android:scrollbarSize="50dp"
         android:text="ToDo"
         android:textColor="#673AB7"
-
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="163dp" />
+        app:layout_constraintBottom_toTopOf="@+id/description_text"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909" />
 
     <CheckBox
-        android:id="@+id/done"
+        android:id="@+id/to_do_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="127dp"
+        android:layout_marginEnd="295dp"
+        android:layout_marginBottom="287dp"
         android:text="Done"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="396dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="43dp"
         android:layout_height="51dp"
-        app:srcCompat="@drawable/ic_baseline_date_range_24"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="219dp" />
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="127dp"
+        app:layout_constraintBottom_toTopOf="@+id/to_do_done"
+        app:layout_constraintEnd_toStartOf="@+id/description_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/ic_baseline_date_range_24" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
-        android:hint="@string/toDo_title_hint"
+        android:hint="enter your task"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="152dp" />
+        android:minHeight="48dp"
+        app:layout_constraintStart_toEndOf="@+id/todo_text"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/todo_date"
+        android:id="@+id/to_do_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="171dp"
+        android:layout_marginBottom="389dp"
         android:text="Do Date"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="295dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
     <Button
-        android:id="@+id/delete"
+        android:id="@+id/to_do_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="254dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="129dp"
         android:text="Delete"
-        tools:layout_editor_absoluteX="254dp"
-        tools:layout_editor_absoluteY="554dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/description_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="37dp"
         android:text="description "
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="230dp" />
+        app:layout_constraintBottom_toTopOf="@+id/to_do_date"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName3"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
+        android:hint="enter your "
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="219dp" />
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/to_do_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/description_text"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
