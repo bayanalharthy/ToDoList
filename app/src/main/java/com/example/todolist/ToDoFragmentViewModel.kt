@@ -25,4 +25,16 @@ class ToDoFragmentViewModel : ViewModel() {
     fun saveUpdate(toDoList: ToDoList){
         toDoListRepository.updateToDoList(toDoList)
     }
+
+    fun delete(toDoList: ToDoList){
+        toDoListRepository.deleteToDOList(toDoList)
+
+    }
+
+    fun addToDoList(toDoList: ToDoList) {
+        toDoListRepository.addToDoList(toDoList)
+
+    }
+
+
 }

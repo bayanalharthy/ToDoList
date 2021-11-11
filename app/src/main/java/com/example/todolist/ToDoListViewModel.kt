@@ -10,9 +10,6 @@ class ToDoListViewModel : ViewModel() {
 
     val liveDataToDoList=toDoListRepository.getAllToDoList()
 
-    fun addToDoList(toDoList: ToDoList) {
-        toDoListRepository.addToDoList(toDoList)
 
-    }
 }
 

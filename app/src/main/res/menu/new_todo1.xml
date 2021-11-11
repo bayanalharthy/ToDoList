@@ -6,5 +6,5 @@
         android:id="@+id/new_todo"
         android:icon="@android:drawable/ic_menu_add"
         android:title="Item"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="ifRoom|withText" />
 </menu>

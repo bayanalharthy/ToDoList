@@ -20,12 +20,15 @@
         tools:layout_editor_absoluteY="646dp" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="388dp"
         android:layout_height="259dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="66dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/img2"
-        tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="224dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
     <TextView
         android:id="@+id/textView"
@@ -41,20 +44,24 @@
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="105dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="52dp"
         android:layout_height="26dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginBottom="78dp"
         android:text="Name"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="113dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

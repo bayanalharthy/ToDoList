@@ -12,7 +12,9 @@ import java.util.*
     var date: Date = Date(),
     var name: String = "",
     var description: String = "" ,
-    var done: Boolean = false
+    var done: Boolean = false,
+    var doDate:Date?= null
+
 )
 
 
