@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -86,6 +87,8 @@ private lateinit var ToDoListRecyclerView: RecyclerView
         private lateinit var toDoList: ToDoList
         private val titleTextView: TextView = itemView.findViewById(R.id.title_task)
         private val dateTextView: TextView = itemView.findViewById(R.id.date_task_item)
+        private val desc_txt_task: TextView = itemView.findViewById(R.id.desc_txt_task)
+        private val img_done: ImageView = itemView.findViewById(R.id.img_done)
 
 
 
@@ -98,7 +101,15 @@ private lateinit var ToDoListRecyclerView: RecyclerView
         fun bind(toDoList: ToDoList) {
             this.toDoList=toDoList
             titleTextView.text = toDoList.title
+            desc_txt_task.text = toDoList.description
             dateTextView.text=toDoList.date.toString()
+            if(toDoList.done)
+            {
+                img_done.visibility = View.VISIBLE
+            }else {
+                img_done.visibility = View.GONE
+
+            }
 
             dateTextView.setOnClickListener {
                 if (toDoList.doDate!=null){

@@ -7,7 +7,7 @@ import java.util.*
 @Entity
     data class ToDoList
     (
-    @PrimaryKey val id: UUID = UUID.randomUUID(),
+    @PrimaryKey  val id: UUID = UUID.randomUUID(),
     var title: String = "",
     var date: Date = Date(),
     var name: String = "",

@@ -172,6 +172,7 @@ class ToDoFragment : Fragment(),DatePickerDialogFragment.DatePickercallBakc {
 
     override fun onStop() {
         super.onStop()
+        Log.e("Error Stop" , "Yes");
         fragmentViewModel.saveUpdate(toDoList)
     }
 
