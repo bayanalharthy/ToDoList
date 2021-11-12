@@ -1,5 +1,7 @@
 package com.example.todolist
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,10 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.database.DatePickerDialogFragment
 import com.example.todolist.database.ToDoList
@@ -19,16 +18,18 @@ import java.util.*
 
 const val TASK_KEY = "date task date"
 
-class ToDoFragment : Fragment(),DatePickerDialogFragment.DatePickercallBakc {
+class ToDoFragment : Fragment(), DatePickerDialogFragment.DatePickercallBakc {
 
     private lateinit var titleEditText: EditText
     private lateinit var toDoList: ToDoList
     private lateinit var dateBtn: Button
     private lateinit var doneCheckBox: CheckBox
     private lateinit var descriptionEditText: EditText
+
     //private lateinit var addBtn: Button
     private lateinit var deleteBtn: Button
     private lateinit var add1Btn: Button
+    private lateinit var WelcomeTxt: TextView
 
     private var toDoListData = ToDoList()
 
@@ -44,10 +45,21 @@ class ToDoFragment : Fragment(),DatePickerDialogFragment.DatePickercallBakc {
         val view = inflater.inflate(R.layout.fragment_todo_list_item, container, false)
         titleEditText = view.findViewById(R.id.enter_task)
         dateBtn = view.findViewById(R.id.to_do_date)
+        WelcomeTxt = view.findViewById(R.id.txt_welcome)
         descriptionEditText = view.findViewById(R.id.enter_des)
         add1Btn = view.findViewById(R.id.ADD_2)
         deleteBtn = view.findViewById(R.id.to_do_delete)
         doneCheckBox = view.findViewById(R.id.to_do_done)
+        val sharedPreference = getActivity()?.getSharedPreferences("BayanApp", Context.MODE_PRIVATE)
+        var
+                edietor = sharedPreference?.edit()
+
+        if (sharedPreference != null) {
+            if (sharedPreference.getBoolean("isOpen", false)) {
+                WelcomeTxt.text = sharedPreference.getString("UserName", "Welcome Guest")
+            }
+        }
+
 
 //        dateBtn.apply {
 //            text = toDoList.date.toString()
@@ -74,7 +86,7 @@ class ToDoFragment : Fragment(),DatePickerDialogFragment.DatePickercallBakc {
             toDoList.description = descriptionEditText.text.toString()
 
             fragmentViewModel.addToDoList(toDoList)
-           // fragmentViewModel.saveUpdate(toDoList)
+            // fragmentViewModel.saveUpdate(toDoList)
             val fragment = List_Fragment()
             activity?.let {
                 it.supportFragmentManager
@@ -137,7 +149,7 @@ class ToDoFragment : Fragment(),DatePickerDialogFragment.DatePickercallBakc {
         titleEditText.addTextChangedListener(textWatcher)
 
         descriptionEditText.addTextChangedListener(textWatcher1)
-        doneCheckBox.setOnCheckedChangeListener{ _, isChecked ->
+        doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
             toDoList.done = isChecked
 
         }
@@ -172,7 +184,7 @@ class ToDoFragment : Fragment(),DatePickerDialogFragment.DatePickercallBakc {
 
     override fun onStop() {
         super.onStop()
-        Log.e("Error Stop" , "Yes");
+        Log.e("Error Stop", "Yes");
         fragmentViewModel.saveUpdate(toDoList)
     }
 
