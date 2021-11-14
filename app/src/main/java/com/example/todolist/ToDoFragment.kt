@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.database.DatePickerDialogFragment
 import com.example.todolist.database.ToDoList
+import java.text.DateFormat
 import java.util.*
 
 const val TASK_KEY = "date task date"
@@ -24,8 +25,6 @@ class ToDoFragment : Fragment(), DatePickerDialogFragment.DatePickercallBakc {
     private lateinit var dateBtn: ImageView
     private lateinit var doneCheckBox: CheckBox
     private lateinit var descriptionEditText: EditText
-
-    //private lateinit var addBtn: Button
     private lateinit var deleteBtn: ImageView
     private lateinit var add1Btn: ImageView
     private lateinit var WelcomeTxt: TextView
@@ -49,9 +48,10 @@ class ToDoFragment : Fragment(), DatePickerDialogFragment.DatePickercallBakc {
         add1Btn = view.findViewById(R.id.ADD_2)
         deleteBtn = view.findViewById(R.id.to_do_delete)
         doneCheckBox = view.findViewById(R.id.to_do_done)
+
+
         val sharedPreference = getActivity()?.getSharedPreferences("BayanApp", Context.MODE_PRIVATE)
-        var
-                edietor = sharedPreference?.edit()
+
 
         if (sharedPreference != null) {
             if (sharedPreference.getBoolean("isOpen", false)) {
@@ -148,6 +148,9 @@ class ToDoFragment : Fragment(), DatePickerDialogFragment.DatePickercallBakc {
         titleEditText.addTextChangedListener(textWatcher)
 
         descriptionEditText.addTextChangedListener(textWatcher1)
+
+
+
         doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
             toDoList.done = isChecked
 
@@ -174,7 +177,7 @@ class ToDoFragment : Fragment(), DatePickerDialogFragment.DatePickercallBakc {
                 it?.let {
                     toDoList = it
                     titleEditText.setText(it.title)
-                //    dateBtn.text = it.date.toString()
+
                     doneCheckBox.isChecked = it.done ?: false
                 }
             }
@@ -190,7 +193,7 @@ class ToDoFragment : Fragment(), DatePickerDialogFragment.DatePickercallBakc {
     override fun onDateSelected(date: Date) {
 
         toDoList.date = date
-   //     dateBtn.text = date.toString()
+
     }
 }
 

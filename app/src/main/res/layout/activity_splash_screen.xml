@@ -53,7 +53,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:shadowColor="#551818"
-        android:text="add"
+        android:text="New List"
         android:textColorLink="@color/black"
         app:strokeColor="#FF9800"
         tools:layout_editor_absoluteX="273dp"

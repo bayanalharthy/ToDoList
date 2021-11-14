@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#DCE2FF"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginBottom="4dp"
     android:padding="8dp">
 
     <TextView
@@ -16,7 +20,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="title task"
-        android:textColor="#3C7FB5"
+        android:textColor="#673AB7"
         android:textSize="24sp" />
 
     <TextView
@@ -59,4 +63,19 @@
         android:checked="true"
         android:src="@drawable/icon_done_task"
         android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/txt_date_due"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/desc_txt_task"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+
+        android:textColor="#3C7FB5"
+        android:textSize="15sp" />
+
 </RelativeLayout>

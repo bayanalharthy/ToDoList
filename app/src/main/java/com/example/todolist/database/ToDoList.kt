@@ -13,7 +13,7 @@ import java.util.*
     var name: String = "",
     var description: String = "" ,
     var done: Boolean = false,
-    var doDate:Date?= null
+    var dueDate:Date?= null
 
 )
 
